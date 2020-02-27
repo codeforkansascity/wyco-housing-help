@@ -119,3 +119,6 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/django
+
+#ignore downloaded node modules, including Material UI and React
+node_modules/
