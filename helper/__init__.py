@@ -1,7 +1,9 @@
 import os
 
-from flask import Flask
-import requests
+from flask import (Flask, jsonify, render_template)
+
+# for retrieving db. move?
+from helper.db import get_db
 
 def create_app(test_config=None):
 
@@ -27,26 +29,17 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # fetch parcel data
-    @app.route('/')
-    def updateParcels():
-        r = requests.get(
-        'https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
-        )
-
-        if './helper/tmp/parcels.json':
-            os.remove('./helper/tmp/parcels.json')
-
-        with open('./helper/tmp/parcels.tmp.json', 'w') as f:
-            f.write(r.text)
-
-        os.rename('./helper/tmp/parcels.tmp.json', './helper/tmp/parcels.json')
-        return "updated!"
     # return all properties
-    @app.route('/all')
+    @app.route('/', methods=["GET"])
     def listAll():
-        with open('./helper/tmp/parcels.json', 'r') as f:
-            data = f.read()
-            return data
+        db = get_db()
+        parcel = db.execute(
+            'SELECT parcel_py_ACRE FROM parcels WHERE OBJECTID = 1'
+        ).fetchone()
+
+        return render_template('test.html', parcel=parcel)
+
+    from . import db
+    db.init_app(app)
 
     return app
