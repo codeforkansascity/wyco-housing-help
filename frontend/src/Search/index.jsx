@@ -22,13 +22,13 @@ const Search = () => {
         }}
       >
         <Paper>
-          <h2>Hello, Search</h2>
+          <h2>Search Land Bank Properties</h2>
           <form>
             <TextField
               id="Location"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              label="Search by Location"
+              label="Search by ID"
               variant="standard"
               style={{
                 width: "50vw"
