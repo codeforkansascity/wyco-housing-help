@@ -6,12 +6,14 @@ const Results = props => {
   // query arcGIS api to retrieve property info.
   // store in custom hook?
   useEffect(() => {
-    const ID = props.search;
+    // const Id = props.search.id;
+    const Price = props.search.price;
     const fetchParcels = async () => {
       const response = await fetch(
-        `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query?where=OBJECTID=${ID}&outFields=*&f=json`
+        `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query?where=LAndBAnkTop100CSVUpdate_csv_App < ${Price}&outFields=*&f=json`
       );
       const json = await response.json();
+      console.log(json);
       const attributes = await json.features;
       setResults(attributes);
     };
