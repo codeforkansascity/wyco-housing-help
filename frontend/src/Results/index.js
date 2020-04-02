@@ -6,42 +6,41 @@ const Results = props => {
   // query arcGIS api to retrieve property info.
   // store in custom hook?
   useEffect(() => {
-    // const Id = props.search.id;
     const Price = props.search.price;
     const fetchParcels = async () => {
       const response = await fetch(
         `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query?where=LAndBAnkTop100CSVUpdate_csv_App < ${Price}&outFields=*&f=json`
       );
       const json = await response.json();
-      console.log(json);
-      const attributes = await json.features;
-      setResults(attributes);
+      const parcels = await json.features;
+      setResults(parcels);
     };
     fetchParcels();
   }, [props.search]);
 
-  //working attempt to reference specific properties in JSON response.
-  //hoisting isn't desired here, so will need to revise.
+  // On each render, reset list of parcels.
+  // Add one parcel element for each one listed in JSON response.
+  // Each parcel element should contain descriptive info on that parcel.
+  // Since results is undefined on rerender, 'if' is required to prevent reference error. Correction?
+  const allParcels = [];
   if (results !== undefined) {
-    var address = results[0]?.attributes.LAndBAnkTop100CSVUpdate_csv_Add;
-    var city = results[0]?.attributes.LAndBAnkTop100CSVUpdate_csv_CIT;
-    var state = results[0]?.attributes.LAndBAnkTop100CSVUpdate_csv_STA;
-    var zip = results[0]?.attributes.LAndBAnkTop100CSVUpdate_csv_ZIP;
-    var appraised = results[0]?.attributes.LAndBAnkTop100CSVUpdate_csv_App;
+    for (let i = 0; i < results.length; i++) {
+      let address = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_Add;
+      let city = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_CIT;
+      let state = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_STA;
+      let zip = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_ZIP;
+      let appraised = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_App;
+      allParcels.push(
+        <h4 key={i}>
+          {address}, {city}, {state}, {zip}, ${appraised}
+        </h4>
+      );
+    }
   }
 
   return (
     <div>
-      <Card>
-        {results && (
-          <div>
-            <p>
-              {address}, {city}, {state} {zip}
-            </p>
-            <h4>${appraised}</h4>
-          </div>
-        )}
-      </Card>
+      <Card>{results && <div>{allParcels}</div>}</Card>
     </div>
   );
 };

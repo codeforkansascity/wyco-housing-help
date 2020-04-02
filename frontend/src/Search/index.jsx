@@ -10,8 +10,7 @@ import {
 import Results from "../Results";
 
 const Search = () => {
-  // initialize state with no location
-  const [id, setId] = useState("");
+  // initialize state with no locations
   const [price, setPrice] = useState("");
 
   return (
@@ -25,25 +24,12 @@ const Search = () => {
         <Paper>
           <h2>Search Land Bank Properties</h2>
           <form>
-            {/* ID Search */}
-            <TextField
-              id="ID"
-              value={id}
-              onChange={e => setId(e.target.value)}
-              label="Search by ID"
-              variant="standard"
-              style={{
-                width: "50vw"
-              }}
-              required
-            />
-
             {/* Price Search */}
             <TextField
               id="Price"
               value={price}
               onChange={e => setPrice(e.target.value)}
-              label="Search by Price"
+              label="Maximum Price"
               variant="standard"
               style={{
                 width: "50vw"
@@ -72,7 +58,7 @@ const Search = () => {
           </form>
         </Paper>
       </Box>
-      <Results search={{ id, price }} />
+      <Results search={{ price }} />
     </Container>
   );
 };
