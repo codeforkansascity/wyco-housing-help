@@ -6,10 +6,12 @@ const Results = props => {
   // query arcGIS api to retrieve property info.
   // store in custom hook?
   useEffect(() => {
+    const Appr = "LAndBAnkTop100CSVUpdate_csv_App";
     const Price = props.search.price;
     const fetchParcels = async () => {
       const response = await fetch(
-        `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query?where=LAndBAnkTop100CSVUpdate_csv_App < ${Price}&outFields=*&f=json`
+        `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query?` +
+          `where=${Appr} < ${Price}&orderByFields=${Appr} DESC&outFields=*&f=json`
       );
       const json = await response.json();
       const parcels = await json.features;
@@ -31,16 +33,19 @@ const Results = props => {
       let zip = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_ZIP;
       let appraised = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_App;
       allParcels.push(
-        <h4 key={i}>
-          {address}, {city}, {state}, {zip}, ${appraised}
-        </h4>
+        <Card style={{ marginBottom: "2vh", textAlign: "left" }}>
+          <h4 key={i}>
+            {address}, {city}, {state}, {zip}, ${appraised}
+          </h4>
+        </Card>
       );
     }
   }
 
   return (
     <div>
-      <Card>{results && <div>{allParcels}</div>}</Card>
+      <p>{results && results.length + " results"}</p>
+      {results && <div>{allParcels}</div>}
     </div>
   );
 };
