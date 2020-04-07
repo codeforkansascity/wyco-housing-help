@@ -6,9 +6,6 @@ import {
   Paper,
   FormControl,
   TextField,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@material-ui/core";
 import Search from "../Search";
 
@@ -18,8 +15,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: "50vw",
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  form: {
+    width: "60vw",
+    margin: "5vh auto",
   },
 }));
 
@@ -29,23 +27,12 @@ const UserInput = () => {
 
   // initialize state with no locations
   const [price, setPrice] = useState("");
-  const [city, setCity] = useState("");
-
-  // update city from dropdown
-  const handleCity = (e) => {
-    setCity(e.target.value);
-  };
 
   return (
     <Container>
-      <Box
-        style={{
-          width: "60vw",
-          margin: "10vh auto",
-        }}
-      >
+      <Box className={classes.form}>
         <Paper>
-          <h2>Search Land Bank Properties</h2>
+          <h2>Search Top 100 Land Bank Properties</h2>
           {/* Price Input */}
           <FormControl className={classes.formControl}>
             <TextField
@@ -56,23 +43,9 @@ const UserInput = () => {
               variant="standard"
             />
           </FormControl>
-          {/* City Select */}
-          <FormControl className={classes.formControl}>
-            <InputLabel id="city-select-label">City</InputLabel>
-            <Select
-              labelId="city-select-label"
-              id="city-select"
-              value={city}
-              onChange={handleCity}
-            >
-              <MenuItem value={"KANSAS CITY"}>Kansas City</MenuItem>
-              <MenuItem value={"BONNER SPRINGS"}>Bonner Springs</MenuItem>
-              <MenuItem value={"EDWARDSVILLE"}>Edwardsville</MenuItem>
-            </Select>
-          </FormControl>
         </Paper>
       </Box>
-      <Search price={{ price }} city={city} />
+      <Search price={{ price }} />
     </Container>
   );
 };

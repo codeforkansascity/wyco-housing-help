@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card } from "@material-ui/core";
+import { Card, List, ListItem, ListSubheader } from "@material-ui/core";
 
 const Search = (props) => {
   const [results, setResults] = useState();
@@ -7,16 +7,17 @@ const Search = (props) => {
   // query arcGIS api to retrieve property info.
   // store in custom hook?
   useEffect(() => {
-    const Appr = "LAndBAnkTop100CSVUpdate_csv_App";
-    const CIT = "LAndBAnkTop100CSVUpdate_csv_CIT";
-    const Price = props.price.price;
-    const City = props.city;
+    const COST = "LAndBAnkTop100CSVUpdate_csv_App";
+    const CITY = "LAndBAnkTop100CSVUpdate_csv_CIT";
+    const RANK = "LAndBAnkTop100CSVUpdate_csv_Ran";
+    const UserMax = props.price.price;
     const fetchParcels = async () => {
       const response = await fetch(
         `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query` +
-          `?where=${CIT} = '${City}' AND ` +
-          `${Appr} < ${Price}` +
-          `&orderByFields=${Appr} DESC&outFields=*&f=json`
+          `?where=${CITY} = 'KANSAS CITY' AND ` +
+          `${RANK} < 100 AND ` +
+          `${COST} < ${UserMax}` +
+          `&orderByFields=${RANK} DESC&outFields=*&f=json`
       );
       const json = await response.json();
       const parcels = await json.features;
@@ -38,37 +39,42 @@ const Search = (props) => {
       let zip = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_ZIP;
       let appraised = results[i]?.attributes.LAndBAnkTop100CSVUpdate_csv_App;
       allParcels.push(
-        <Card
-          key={i}
-          style={{
-            margin: "2vh auto",
-            padding: "1%",
-            textAlign: "left",
-            width: "50vw",
-          }}
-        >
-          {/* Map/image placeholder */}
-          <div
+        <ListItem key={i}>
+          <Card
             style={{
-              height: "10vh",
-              width: "inherit",
-              backgroundColor: "#F0F0F0",
+              margin: "2vh auto",
+              padding: "1%",
+              textAlign: "left",
+              width: "50vw",
             }}
-          />
+          >
+            {/* Map/image placeholder */}
+            <div
+              style={{
+                height: "10vh",
+                width: "30vw",
+                backgroundColor: "#F0F0F0",
+              }}
+            />
 
-          <h3>${appraised}</h3>
-          <em>
-            {address}, {city}, {state}, {zip}
-          </em>
-        </Card>
+            <h3>${appraised}</h3>
+            <em>
+              {address}, {city}, {state}, {zip}
+            </em>
+          </Card>
+        </ListItem>
       );
     }
   }
 
   return (
     <div>
-      <p>{results && results.length + " results"}</p>
-      {results && <div>{allParcels}</div>}
+      <p style={{ marginBottom: "5px" }}>
+        {results && results.length + " results"}
+      </p>
+      <List style={{ overflow: "auto", maxHeight: "50vh", maxWidth: "50vw" }}>
+        {results && <div>{allParcels}</div>}
+      </List>
     </div>
   );
 };
