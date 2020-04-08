@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import PropertyList from "../PropertyList";
 
+import PropertyMap from "../PropertyMap";
+
 // passes search results to be displayed in list or map components.
 
 const Search = (props) => {
@@ -32,6 +34,7 @@ const Search = (props) => {
   return (
     <div>
       <PropertyList results={results} />
+      <PropertyMap />
     </div>
   );
 };
