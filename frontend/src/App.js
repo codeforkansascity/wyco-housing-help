@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/App.css";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter, Route, Link } from "react-router-dom";
 
 //import our components
 import UserInput from "./UserInput";
@@ -9,10 +9,10 @@ import UserInput from "./UserInput";
 const NavMenu = () => {
   return (
     <div>
-      <Link to="/wyco-housing-help/search">
+      <Link to="/search">
         <button>Search</button>
       </Link>
-      <Link to="/wyco-housing-help/about">
+      <Link to="/about">
         <button>About</button>
       </Link>
     </div>
@@ -29,18 +29,18 @@ const About = () => {
 
 function App() {
   return (
-    <Router>
+    <HashRouter basename="/">
       <div className="App">
         <header className="App-header">
           <h1>Hello, header</h1>
           <NavMenu />
         </header>
         <div>
-          <Route exact path="/wyco-housing-help/search" component={UserInput} />
-          <Route exact path="/wyco-housing-help/about" component={About} />
+          <Route exact path="/search" component={UserInput} />
+          <Route exact path="/about" component={About} />
         </div>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 
