@@ -36,8 +36,8 @@ function App() {
           <NavMenu />
         </header>
         <div>
-          <Route exact path="/" component={UserInput} />
-          <Route exact path="/about" component={About} />
+          <Route exact path="/wyco-housing-help/search" component={UserInput} />
+          <Route exact path="/wyco-housing-help/about" component={About} />
         </div>
       </div>
     </Router>
