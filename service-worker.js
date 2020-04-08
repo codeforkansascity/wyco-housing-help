@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/wyco-housing-help/precache-manifest.f41b0689eef74159f8d85ba78241a294.js"
+  "/wyco-housing-help/precache-manifest.ab8ca37bd414630594e957b67905d8f6.js"
 );
 
 self.addEventListener('message', (event) => {
