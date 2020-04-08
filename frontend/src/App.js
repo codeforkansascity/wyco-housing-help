@@ -9,10 +9,10 @@ import UserInput from "./UserInput";
 const NavMenu = () => {
   return (
     <div>
-      <Link to="/">
-        <button>Home</button>
+      <Link to="/wyco-housing-help/search">
+        <button>Search</button>
       </Link>
-      <Link to="/about">
+      <Link to="/wyco-housing-help/about">
         <button>About</button>
       </Link>
     </div>
