@@ -47,9 +47,6 @@ const PropertyList = (props) => {
 
   return (
     <div>
-      <p style={{ marginBottom: "5px" }}>
-        {results && results.length + " results"}
-      </p>
       <List
         style={{
           overflow: "auto",

@@ -56,6 +56,9 @@ const Search = (props) => {
 
   return (
     <div>
+      <p style={{ marginBottom: "5px" }}>
+        {results && results.length + " results"}
+      </p>
       <div style={{ height: "60vh" }}>
         {listView === true && <PropertyList results={results} />}
         {listView === false && <PropertyMap locations={locations} />}
