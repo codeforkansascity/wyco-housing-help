@@ -7,7 +7,17 @@ import PropertyMap from "../PropertyMap";
 // passes search results to be displayed in list or map components.
 
 const Search = (props) => {
+  // store response from ArcGIS API
   const [results, setResults] = useState();
+
+  // toggle list view
+  const [listView, setListView] = useState(true);
+  const toggleList = () => {
+    setListView(true);
+  };
+  const toggleMap = () => {
+    setListView(false);
+  };
 
   // query arcGIS api to retrieve property info.
   // store in custom hook?
@@ -33,8 +43,14 @@ const Search = (props) => {
 
   return (
     <div>
-      <PropertyList results={results} />
-      <PropertyMap />
+      <div style={{ height: "60vh" }}>
+        {listView === true && <PropertyList results={results} />}
+        {listView === false && <PropertyMap />}
+      </div>
+      <div style={{ position: "absolute" }}>
+        <button onClick={toggleList}>List</button>
+        <button onClick={toggleMap}>Map</button>
+      </div>
     </div>
   );
 };
