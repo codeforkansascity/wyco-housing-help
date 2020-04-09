@@ -2,6 +2,8 @@ import React from "react";
 import { Map as LeafletMap, TileLayer, GeoJSON } from "react-leaflet";
 
 const PropertyMap = (props) => {
+  console.log(props.locations);
+
   return (
     <div>
       <LeafletMap

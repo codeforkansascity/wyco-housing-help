@@ -22,38 +22,40 @@ const Search = (props) => {
   // query arcGIS api to retrieve property info.
   // store in custom hook?
   useEffect(() => {
-    // query for property data to show in list
     const COST = "LAndBAnkTop100CSVUpdate_csv_App";
     const CITY = "LAndBAnkTop100CSVUpdate_csv_CIT";
     const RANK = "LAndBAnkTop100CSVUpdate_csv_Ran";
     const UserMax = props.price.price;
+
+    const URL =
+      `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query` +
+      `?where=${CITY} = 'KANSAS CITY' AND ` +
+      `${RANK} > 2283 AND ` +
+      `${COST} < ${UserMax}` +
+      `&orderByFields=${RANK} DESC&outFields=*&f=`;
+
+    // query for property data to show in list
     const fetchParcels = async () => {
-      const response = await fetch(
-        `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query` +
-          `?where=${CITY} = 'KANSAS CITY' AND ` +
-          `${RANK} > 2283 AND ` +
-          `${COST} < ${UserMax}` +
-          `&orderByFields=${RANK} DESC&outFields=*&f=json`
-      );
+      const response = await fetch(URL + "json");
       const json = await response.json();
       const parcels = await json.features;
       setResults(parcels);
     };
 
-    //query for location data to show in map
+    // query for location data to show in map
+    // proxy url required to bypass no-cors
     const fetchLocations = async () => {
-      const ProxyUrl = "https://cors-anywhere.herokuapp.com/";
-      const Url =
-        "https://opendata.arcgis.com/datasets/2a688a228d7640d5a6aee290af3a6b91_0.geojson";
-      const response = await fetch(ProxyUrl + Url);
+      const response = await fetch(URL + "geojson");
       const json = await response.json();
       setLocations(json);
     };
 
-    //retrieve data
+    // retrieve data
     fetchParcels();
     fetchLocations();
   }, [props]);
+
+  console.log(results);
 
   return (
     <div>
