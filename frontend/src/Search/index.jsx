@@ -8,7 +8,7 @@ import PropertyMap from "../PropertyMap";
 
 const Search = (props) => {
   // store response from ArcGIS API
-  const [results, setResults] = useState();
+  const [results, setResults] = useState([]);
   const [locations, setLocations] = useState();
   // toggle list view
   const [listView, setListView] = useState(true);
@@ -43,7 +43,6 @@ const Search = (props) => {
     };
 
     // query for location data to show in map
-    // proxy url required to bypass no-cors
     const fetchLocations = async () => {
       const response = await fetch(URL + "geojson");
       const json = await response.json();
@@ -55,18 +54,18 @@ const Search = (props) => {
     fetchLocations();
   }, [props]);
 
-  console.log(results);
-
   return (
     <div>
       <div style={{ height: "60vh" }}>
         {listView === true && <PropertyList results={results} />}
         {listView === false && <PropertyMap locations={locations} />}
       </div>
-      <div style={{ position: "absolute" }}>
-        <button onClick={toggleList}>List</button>
-        <button onClick={toggleMap}>Map</button>
-      </div>
+      {results && (
+        <div style={{ position: "absolute" }}>
+          <button onClick={toggleList}>List</button>
+          <button onClick={toggleMap}>Map</button>
+        </div>
+      )}
     </div>
   );
 };

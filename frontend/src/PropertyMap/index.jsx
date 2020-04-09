@@ -2,7 +2,9 @@ import React from "react";
 import { Map as LeafletMap, TileLayer, GeoJSON } from "react-leaflet";
 
 const PropertyMap = (props) => {
-  console.log(props.locations);
+  const locations = props.locations;
+  // generate unique keys to rerender results
+  const hash = require("object-hash");
 
   return (
     <div>
@@ -17,8 +19,8 @@ const PropertyMap = (props) => {
         />
 
         <GeoJSON
-          key={props.locations}
-          data={props.locations}
+          key={hash(locations)}
+          data={locations}
           style={{ color: "blue" }}
         />
       </LeafletMap>
