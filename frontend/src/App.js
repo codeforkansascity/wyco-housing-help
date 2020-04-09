@@ -4,7 +4,7 @@ import "./styles/App.css";
 import { HashRouter, Route, Link } from "react-router-dom";
 
 //import our components
-import UserInput from "./UserInput";
+import UserInput from "./components/UserInput";
 
 const NavMenu = () => {
   return (
