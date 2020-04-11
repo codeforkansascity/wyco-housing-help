@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button, Typography } from "@material-ui/core";
 
 import PropertyList from "../PropertyList";
 
@@ -56,17 +57,38 @@ const Search = (props) => {
 
   return (
     <div>
-      <p style={{ marginBottom: "5px" }}>
+      <Typography style={{ marginBottom: "1vh" }}>
         {results && results.length + " results"}
-      </p>
-      <div style={{ height: "60vh" }}>
+      </Typography>
+      <div style={{ marginBottom: "1vh" }}>
         {listView === true && <PropertyList results={results} />}
         {listView === false && <PropertyMap locations={locations} />}
       </div>
       {results && (
-        <div style={{ position: "absolute" }}>
-          <button onClick={toggleList}>List</button>
-          <button onClick={toggleMap}>Map</button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            marginBottom: "3vh",
+          }}
+        >
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            onClick={toggleList}
+          >
+            List
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="large"
+            onClick={toggleMap}
+          >
+            Map
+          </Button>
         </div>
       )}
     </div>

@@ -1,7 +1,31 @@
 import React from "react";
 import { Card, List, ListItem } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
+
+// styling for mobile/full
+const useStyles = makeStyles(() => ({
+  list: {
+    overflow: "auto",
+    width: "60vw",
+    height: "45vh",
+    margin: "0 auto",
+  },
+  mobileList: {
+    overflow: "auto",
+    width: "90vw",
+    height: "35vh",
+    margin: "0 auto",
+  },
+}));
 
 const PropertyList = (props) => {
+  // for media breakpoints
+  const isMobile = useMediaQuery("(max-width: 700px)");
+
+  // style classes
+  const classes = useStyles();
+
   const results = props.results;
 
   // On each render, reset list of parcels.
@@ -20,10 +44,9 @@ const PropertyList = (props) => {
         <ListItem key={i}>
           <Card
             style={{
-              margin: "2vh auto",
               padding: "1%",
               textAlign: "left",
-              width: "50vw",
+              width: "90vw",
             }}
           >
             {/* Map/image placeholder */}
@@ -47,16 +70,15 @@ const PropertyList = (props) => {
 
   return (
     <div>
-      <List
-        style={{
-          overflow: "auto",
-          margin: "0 auto",
-          maxHeight: "50vh",
-          maxWidth: "50vw",
-        }}
-      >
-        {results && <div>{allParcels}</div>}
-      </List>
+      {isMobile ? (
+        <List className={classes.mobileList}>
+          {results && <div>{allParcels}</div>}
+        </List>
+      ) : (
+        <List className={classes.list}>
+          {results && <div>{allParcels}</div>}
+        </List>
+      )}
     </div>
   );
 };
