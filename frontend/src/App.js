@@ -181,11 +181,6 @@ function App() {
           <Route exact path="/search" component={UserInput} />
           <Route exact path="/about" component={About} />
         </main>
-        <footer style={{ padding: "5vh" }}>
-          <Typography variant="caption" align="center">
-            2020 Code for KC
-          </Typography>
-        </footer>
       </div>
     </HashRouter>
   );
