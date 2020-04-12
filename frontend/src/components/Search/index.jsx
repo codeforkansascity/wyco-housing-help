@@ -66,15 +66,8 @@ const Search = (props) => {
 
   return (
     <div>
-      <Typography style={{ marginBottom: "1vh" }}>
-        {results && results.length + " results"}
-      </Typography>
       {results ? (
         <div>
-          <div style={{ marginBottom: "1vh" }}>
-            {listView === true && <PropertyList results={results} />}
-            {listView === false && <PropertyMap locations={locations} />}
-          </div>
           <div
             style={{
               display: "flex",
@@ -101,6 +94,10 @@ const Search = (props) => {
               Map
             </Button>
           </div>
+          <div style={{ marginBottom: "1vh" }}>
+            {listView === true && <PropertyList results={results} />}
+            {listView === false && <PropertyMap locations={locations} />}
+          </div>
         </div>
       ) : (
         <div
@@ -116,6 +113,10 @@ const Search = (props) => {
           </Typography>
         </div>
       )}
+
+      <Typography style={{ marginBottom: "1vh" }}>
+        {results && results.length + " results"}
+      </Typography>
     </div>
   );
 };
