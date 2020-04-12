@@ -23,11 +23,15 @@ const Search = (props) => {
   // query arcGIS api to retrieve property info.
   // store in custom hook?
   useEffect(() => {
+    const abortController = new AbortController();
+
+    // parameters for fetch request
     const COST = "LAndBAnkTop100CSVUpdate_csv_App";
     const CITY = "LAndBAnkTop100CSVUpdate_csv_CIT";
     const RANK = "LAndBAnkTop100CSVUpdate_csv_Ran";
     const UserMax = props.price.price;
 
+    // apply params to api call
     const URL =
       `https://services1.arcgis.com/Qo2HHQp8vgPs2wg3/arcgis/rest/services/LandBankRankingUpdate/FeatureServer/0/query` +
       `?where=${CITY} = 'KANSAS CITY' AND ` +
@@ -53,6 +57,11 @@ const Search = (props) => {
     // retrieve data
     fetchParcels();
     fetchLocations();
+
+    // cleanup function to cancel requests after no longer needed
+    return () => {
+      abortController.abort();
+    };
   }, [props]);
 
   return (

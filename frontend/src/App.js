@@ -65,11 +65,11 @@ function App() {
         <header className="App-header">
           <h1>Wyco Housing Help</h1>
         </header>
-        <body margin="0 auto">
+        <main margin="0 auto">
           <Route exact path="/" component={Welcome} />
           <Route exact path="/search" component={UserInput} />
           <Route exact path="/about" component={About} />
-        </body>
+        </main>
         <NavMenu />
         <footer
           style={{

@@ -24,7 +24,19 @@ const PropertyMap = (props) => {
   // style classes
   const classes = useStyles();
 
-  const locations = props.locations;
+  let locations;
+
+  // GeoJSON component always requires a geoJSON as data.
+  // set a blank geoJSON when search fails to prevent crashing
+  if (!props.locations.type) {
+    locations = {
+      type: "FeatureCollection",
+      features: [],
+    };
+  } else {
+    locations = props.locations;
+  }
+
   // generate unique keys to rerender results
   const hash = require("object-hash");
 
