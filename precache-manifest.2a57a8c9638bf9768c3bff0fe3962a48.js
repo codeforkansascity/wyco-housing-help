@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e74b360abeee9181e989bde4194164e2",
+    "revision": "e19df6539d9d2d4556118b9700c299e9",
     "url": "/wyco-housing-help/index.html"
   },
   {
-    "revision": "85aa72afd344ea96898e",
+    "revision": "97dfb69ab0816da94922",
     "url": "/wyco-housing-help/static/css/main.2d2242e8.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wyco-housing-help/static/js/2.1418ac18.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "85aa72afd344ea96898e",
-    "url": "/wyco-housing-help/static/js/main.ccab96f8.chunk.js"
+    "revision": "97dfb69ab0816da94922",
+    "url": "/wyco-housing-help/static/js/main.28fd589e.chunk.js"
   },
   {
     "revision": "584d1d342996d9303d19",
