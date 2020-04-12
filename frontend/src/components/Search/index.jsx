@@ -69,35 +69,51 @@ const Search = (props) => {
       <Typography style={{ marginBottom: "1vh" }}>
         {results && results.length + " results"}
       </Typography>
-      <div style={{ marginBottom: "1vh" }}>
-        {listView === true && <PropertyList results={results} />}
-        {listView === false && <PropertyMap locations={locations} />}
-      </div>
-      {results && (
+      {results ? (
+        <div>
+          <div style={{ marginBottom: "1vh" }}>
+            {listView === true && <PropertyList results={results} />}
+            {listView === false && <PropertyMap locations={locations} />}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              marginBottom: "3vh",
+              padding: "2vw",
+            }}
+          >
+            <Button
+              variant="text"
+              color="primary"
+              size="large"
+              onClick={toggleList}
+            >
+              List
+            </Button>
+            <Button
+              variant="text"
+              color="primary"
+              size="large"
+              onClick={toggleMap}
+            >
+              Map
+            </Button>
+          </div>
+        </div>
+      ) : (
         <div
           style={{
+            height: "50vh",
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "column",
             justifyContent: "center",
-            marginBottom: "3vh",
           }}
         >
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            onClick={toggleList}
-          >
-            List
-          </Button>
-          <Button
-            variant="outlined"
-            color="secondary"
-            size="large"
-            onClick={toggleMap}
-          >
-            Map
-          </Button>
+          <Typography variant="subtitle1" color="textSecondary">
+            Enter Max Price to View Results
+          </Typography>
         </div>
       )}
     </div>

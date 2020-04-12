@@ -9,13 +9,13 @@ const useStyles = makeStyles(() => ({
     overflow: "auto",
     width: "60vw",
     height: "45vh",
-    margin: "0 auto",
+    margin: "1vh auto 4vh",
   },
   mobileList: {
     overflow: "auto",
     width: "90vw",
     height: "35vh",
-    margin: "0 auto",
+    margin: "1vh auto 4vh",
   },
 }));
 
