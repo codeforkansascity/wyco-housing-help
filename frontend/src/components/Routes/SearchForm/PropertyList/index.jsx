@@ -3,6 +3,8 @@ import { Card, List, ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 
+import PropertyModal from "../PropertyModal";
+
 // styling for mobile/full
 const useStyles = makeStyles(() => ({
   list: {
@@ -57,11 +59,20 @@ const PropertyList = (props) => {
                 backgroundColor: "#F0F0F0",
               }}
             />
+            <div style={{ marginBottom: "2vh" }}>
+              <h3>${appraised}</h3>
+              <em>
+                {address}
+                <br /> {city}, {state} {zip}
+              </em>
+            </div>
 
-            <h3>${appraised}</h3>
-            <em>
-              {address}, {city}, {state}, {zip}
-            </em>
+            <PropertyModal
+              address={address}
+              city={city}
+              state={state}
+              zip={zip}
+            />
           </Card>
         </ListItem>
       );
