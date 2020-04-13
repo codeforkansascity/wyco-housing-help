@@ -74,7 +74,6 @@ const Search = (props) => {
               flexDirection: "row",
               justifyContent: "center",
               marginBottom: "3vh",
-              padding: "2vw",
             }}
           >
             <Button
@@ -114,7 +113,7 @@ const Search = (props) => {
         </div>
       )}
 
-      <Typography style={{ marginBottom: "1vh" }}>
+      <Typography style={{ marginBottom: "3vh" }}>
         {results && results.length + " results"}
       </Typography>
     </div>

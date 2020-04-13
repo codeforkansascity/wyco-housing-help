@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import Search from "../Search";
+import Search from "./Search";
 import { useMediaQuery } from "@material-ui/core";
 
 //styling for form inputs
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserInput = () => {
+const SearchForm = () => {
   // for media breakpoints
   const isMobile = useMediaQuery("(max-width: 700px)");
 
@@ -39,7 +39,7 @@ const UserInput = () => {
   const [price, setPrice] = useState("");
 
   return (
-    <Container style={{ marginTop: "5vh" }}>
+    <Container style={{ marginTop: "2vh" }}>
       {isMobile ? (
         <Box className={classes.mobileForm}>
           <Paper>
@@ -79,4 +79,4 @@ const UserInput = () => {
   );
 };
 
-export default UserInput;
+export default SearchForm;
