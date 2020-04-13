@@ -30,6 +30,13 @@ const NavMenu = () => {
         value="about"
         icon={<InfoIcon />}
       />
+      <BottomNavigationAction
+        label="Assist"
+        component={Link}
+        to="/assist"
+        value="assist"
+        icon={<InfoIcon />}
+      />
     </BottomNavigation>
   );
 };
