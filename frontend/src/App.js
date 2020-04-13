@@ -45,15 +45,15 @@ function App() {
         <header className="App-header">
           <h1>Wyco Housing Help</h1>
         </header>
+        <nav>
+          <NavMenu />
+        </nav>
         <main margin="0 auto">
           <Route exact path="/" component={Welcome} />
           <Route exact path="/search" component={SearchForm} />
           <Route exact path="/about" component={About} />
           <Route exact path="/assist" component={Assistant} />
         </main>
-        <nav>
-          <NavMenu />
-        </nav>
       </div>
     </HashRouter>
   );
